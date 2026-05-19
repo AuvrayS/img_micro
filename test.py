@@ -10,7 +10,7 @@ if response.status_code ==200:
     print(f"Successfully saved image as {name}_result.jpg")
 
 elif response.status_code == 404:
-    print("Error:", response.jason()["error"])
+    print("Error:", response.json()["error"])
 else:
     print("Unexpected status code:",response.status_code)
 
@@ -22,6 +22,6 @@ if response2.status_code ==200:
     print(f"Successfully saved image as {name2}_result.jpg")
 
 elif response2.status_code == 404:
-    print("Error:", response2.jason()["error"])
+    print("Error:", response2.json()["error"])
 else:
     print("Unexpected status code:",response2.status_code)
