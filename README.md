@@ -8,4 +8,4 @@ image microservice for CS361
 3. To receive data from the microservice, the program responds with the image file itself. if no filepath found, an error JSON object is returned.
     ex: { "error": "No image found for the name: \"eclipse\""}
 
-3. 
+3. <img width="960" height="720" alt="Untitled drawing" src="https://github.com/user-attachments/assets/a1e17a62-f218-45e8-b6a8-5a53142f7ab1" />
