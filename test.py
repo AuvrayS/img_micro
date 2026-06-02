@@ -1,27 +1,31 @@
 import requests
-name = "eclipse"
-name2 = "something"
 
-response = requests.get(f"http://localhost:3001/image", params = {"name": name})
+BASE_URL = "http://localhost:3001/image"
 
-if response.status_code ==200:
-    with open(f"{name}_result.jpg", "wb") as f:
-        f.write(response.content)
-    print(f"Successfully saved image as {name}_result.jpg")
 
-elif response.status_code == 404:
-    print("Error:", response.json()["error"])
-else:
-    print("Unexpected status code:",response.status_code)
+def fetch_image(name):
+    try:
+        response = requests.get(BASE_URL, params={"name": name})
 
-response2 = requests.get(f"http://localhost:3001/image", params = {"name": name2})
+        if response.status_code == 200:
+            filename = f"{name}_result.jpg"
+            with open(filename, "wb") as f:
+                f.write(response.content)
+            print(f"Saved: {filename}")
 
-if response2.status_code ==200:
-    with open(f"{name2}_result.jpg", "wb") as f:
-        f.write(response2.content)
-    print(f"Successfully saved image as {name2}_result.jpg")
+        elif response.status_code == 404:
+            try:
+                print("Error:", response.json().get("error"))
+            except ValueError:
+                print("Error: 404 but no JSON returned")
 
-elif response2.status_code == 404:
-    print("Error:", response2.json()["error"])
-else:
-    print("Unexpected status code:",response2.status_code)
+        else:
+            print("Unexpected status code:", response.status_code)
+
+    except requests.RequestException as e:
+        print("Request failed:", e)
+
+
+# test cases
+fetch_image("eclipse")
+fetch_image("something")

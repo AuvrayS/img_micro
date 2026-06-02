@@ -30,7 +30,7 @@ app.get('/image', (req,res) => {
     }
 //if no file found under name, return error
     if(!foundPath) {
-        return res.status(404).json({ error: `No image found for the name: "${name}`});
+        return res.status(404).json({ error: `No image found for the name: "${name}"`});
     }
     res.sendFile(foundPath);
 });
